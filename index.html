@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular Polygon Diagram</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="polygonCanvas" width="400" height="400"></canvas>
+
+    <script>
+        // Function to draw a regular polygon on the canvas
+        function drawRegularPolygon(context, numberOfSides, sideLength) {
+            context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+
+            const centerX = context.canvas.width / 2;
+            const centerY = context.canvas.height / 2;
+
+            context.beginPath();
+            context.moveTo(centerX + sideLength / 2, centerY);
+
+            for (let i = 1; i <= numberOfSides; i++) {
+                const angle = (i * 2 * Math.PI) / numberOfSides;
+                const x = centerX + sideLength / 2 * Math.cos(angle);
+                const y = centerY + sideLength / 2 * Math.sin(angle);
+                context.lineTo(x, y);
+            }
+
+            context.closePath();
+            context.stroke();
+        }
+
+        // Example usage
+        const canvas = document.getElementById('polygonCanvas');
+        const context = canvas.getContext('2d');
+
+        const numberOfSides = 5;
+        const sideLength = 80;
+
+        drawRegularPolygon(context, numberOfSides, sideLength);
+    </script>
+</body>
+</html>
 
